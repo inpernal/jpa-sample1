@@ -1,2 +1,3 @@
 # jpa-sample1
-jpa 공부#1
+
+### jpa + Spring boot sample code v1
