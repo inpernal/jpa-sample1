@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.jpa.domain.Member;
+import com.example.jpa.domain.member.Member;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -23,7 +23,7 @@ class MemberRepositoryTest {
     public void testMember() {
         // given
         final Member member = new Member();
-        member.setUsername("memberA");
+        member.setName("memberA");
 
         // when
         final Long saveId = memberRepository.save(member);
@@ -31,7 +31,7 @@ class MemberRepositoryTest {
 
         // then
         assertThat(findMember.getId()).isEqualTo(saveId);
-        assertThat(findMember.getUsername()).isEqualTo(member.getUsername());
+        assertThat(findMember.getName()).isEqualTo(member.getName());
         assertThat(findMember).isEqualTo(member);
     }
 
