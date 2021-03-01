@@ -14,14 +14,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.example.jpa.domain.AbstractDomain;
 import com.google.common.collect.Lists;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter @Setter
-public class Category extends AbstractDomain {
+public class Category {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
@@ -42,4 +41,11 @@ public class Category extends AbstractDomain {
 
     @OneToMany(mappedBy = "parent")
     private List<Category> child = Lists.newArrayList();
+
+    // 연관관계 메서드
+    public void addChildCategory(Category category) {
+        child.add(category);
+        category.setParent(this);
+    }
+
 }

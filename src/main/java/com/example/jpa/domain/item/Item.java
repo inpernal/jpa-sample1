@@ -12,7 +12,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 
-import com.example.jpa.domain.AbstractDomain;
+import com.example.jpa.exception.NotEnoughStockException;
 import com.google.common.collect.Lists;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,7 +21,7 @@ import lombok.Setter;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "dtype")
 @Getter @Setter
-public abstract class Item extends AbstractDomain {
+public abstract class Item {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
@@ -36,4 +36,18 @@ public abstract class Item extends AbstractDomain {
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = Lists.newArrayList();
 
+    /**
+     * 재고 증가
+     */
+    public void addStock(int quantity) {
+        this.stockQuantity += quantity;
+    }
+
+    public void removeStock(int quantity) {
+        final int restStock = this.stockQuantity - quantity;
+        if (restStock < 0) {
+            throw new NotEnoughStockException("재고 수량이 0 이하일 수 없습니다.");
+        }
+        this.stockQuantity = restStock;
+    }
 }

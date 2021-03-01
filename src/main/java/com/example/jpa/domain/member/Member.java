@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.example.jpa.domain.AbstractDomain;
 import com.example.jpa.domain.common.Address;
 import com.example.jpa.domain.order.Order;
 import com.google.common.collect.Lists;
@@ -20,7 +19,7 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter
-public class Member extends AbstractDomain {
+public class Member {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")

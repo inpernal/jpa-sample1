@@ -10,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.example.jpa.domain.AbstractDomain;
 import com.example.jpa.domain.item.Item;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +17,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "order_item")
 @Getter @Setter
-public class OrderItem extends AbstractDomain {
+public class OrderItem {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_item_id")

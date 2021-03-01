@@ -18,7 +18,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.example.jpa.domain.AbstractDomain;
 import com.example.jpa.domain.delivery.Delivery;
 import com.example.jpa.domain.member.Member;
 import com.google.common.collect.Lists;
@@ -28,7 +27,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "orders")
 @Getter @Setter
-public class Order extends AbstractDomain {
+public class Order {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
@@ -49,5 +48,21 @@ public class Order extends AbstractDomain {
 
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
+
+    // 연관관계 메서드
+    public void setMember(Member member) {
+        this.member = member;
+        member.getOrders().add(this);
+    }
+
+    public void addOrderItem(OrderItem orderItem) {
+        this.orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
+
+    public void setDelivery(Delivery delivery) {
+        this.delivery = delivery;
+        delivery.setOrder(this);
+    }
 
 }

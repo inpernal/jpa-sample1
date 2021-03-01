@@ -11,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import com.example.jpa.domain.AbstractDomain;
 import com.example.jpa.domain.common.Address;
 import com.example.jpa.domain.order.Order;
 import lombok.Getter;
@@ -19,7 +18,7 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter
-public class Delivery extends AbstractDomain {
+public class Delivery {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "delivery_id")
